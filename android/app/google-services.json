@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "22898416846",
+    "project_id": "garden-ce30f",
+    "storage_bucket": "garden-ce30f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22898416846:android:fe4bd820903768a5f6c49f",
+        "android_client_info": {
+          "package_name": "com.example.garden"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22898416846-0mhp1hjgte7h8s6ddf7elrsd0s7l13cn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.garden",
+            "certificate_hash": "d6b20518f6e9393e199aa23da20e0bf0fc3062bb"
+          }
+        },
+        {
+          "client_id": "22898416846-ijd42igd2s40lu8ufnlkt053hoilv2jl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcK_3MNQGozgtVfeZA-SMdj4gZ11eLqWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22898416846-ijd42igd2s40lu8ufnlkt053hoilv2jl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
