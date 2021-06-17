@@ -98,7 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // TODO: implement initState
     super.initState();
   }
-
+  final _loginForm = GlobalKey<FormState>();
+  TextEditingController _userName = TextEditingController();
   final firestoreInstance = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
@@ -136,30 +137,62 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           )
           : Center(
-              child: ElevatedButton(
-                  onPressed: () {
-                    signInWithGoogleee().then((result) async {
-                      if (result != null) {
-                        print(
-                            'uid ${result.user.uid} ${result.credential} ${result.additionalUserInfo.providerId}');
-                        firestoreInstance
-                            .collection("client")
-                            .doc(result.user.email)
-                            .set({
-                          'profile': result.additionalUserInfo.profile,
-                        }, SetOptions(merge: true)).then((_) async {
-                          setState(() {
-                            auth = true;
+              child: Form(  key: _loginForm,
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          signInWithGoogleee().then((result) async {
+                            if (result != null) {
+                              print(
+                                  'uid ${result.user.uid} ${result.credential} ${result.additionalUserInfo.providerId}');
+                              firestoreInstance
+                                  .collection("client")
+                                  .doc(result.user.email)
+                                  .set({
+                                'profile': result.additionalUserInfo.profile,
+                              }, SetOptions(merge: true)).then((_) async {
+                                setState(() {
+                                  auth = true;
+                                });
+                                SharedPreferences preferences =
+                                    await SharedPreferences.getInstance();
+                                preferences.setBool('islogin', true);
+                                preferences.setString('email', result.user.email);
+                              });
+                            }
                           });
-                          SharedPreferences preferences =
+                        },
+                        child: Text('Sign In with Google')),
+                    Text('or'),
+                    TFFxMx(_userName, 'with your email'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_loginForm.currentState.validate()) {
+                            firestoreInstance
+                                .collection("client")
+                                .doc(_userName.text)
+                                .set({
+                              'profile': _userName.text,
+                            }, SetOptions(merge: true)).then((_) async {
+                              setState(() {
+                                auth = true;
+                              });
+                              SharedPreferences preferences =
                               await SharedPreferences.getInstance();
-                          preferences.setBool('islogin', true);
-                          preferences.setString('email', result.user.email);
-                        });
-                      }
-                    });
-                  },
-                  child: Text('Sign In with Google')),
+                              preferences.setBool('islogin', true);
+                              preferences.setString('email', _userName.text);
+                            });
+                          } else {}
+                        },
+                        child: Text('Next'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
     ); // This trailing comma makes auto-formatting nicer for build methods.
   }
