@@ -120,8 +120,14 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ElevatedButton(onPressed: (){
-                  Get.to(GetArea('Garden'));
+                  Get.to(GetArea('Garden Deshi'));
+                },child: Text('Make Garden Deshi')),
+                ElevatedButton(onPressed: (){
+                  Get.to(GetArea('Garden Abroad'));
                 },child: Text('Make Garden')),
+                ElevatedButton(onPressed: (){
+                  Get.to(GetArea('Wooden Garden'));
+                },child: Text('Wooden Garden')),
                 Expanded(flex: 1,
                   child: ListView.builder(
                     itemCount: gFinal.length,
