@@ -124,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },child: Text('Make Garden Deshi')),
                 ElevatedButton(onPressed: (){
                   Get.to(GetArea('Garden Abroad'));
-                },child: Text('Make Garden')),
+                },child: Text('Fruit Medium Tree')),
                 ElevatedButton(onPressed: (){
                   Get.to(GetArea('Wooden Garden'));
                 },child: Text('Wooden Garden')),

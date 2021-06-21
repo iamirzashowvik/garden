@@ -15,20 +15,23 @@ class S2 extends StatefulWidget {
 
 class _S2State extends State<S2> {
   List<String> selectedtree = [];
-
+double areaX;
   List<String> trees = [];
+  List<String> treeIngredients = [];
   selectliist(){
 
     if(widget.name=='Garden Deshi'){
-     trees = ['mango', 'banana', 'guava'];
+     trees = ['Mango', 'Jackfruit', 'Litchi','Berry'];
+
+     areaX=15*15.0;
 
     }
     else if(widget.name=='Garden Abroad'){
-      trees = ['strawberry', 'apple', 'orange'];
-
+      trees = ['Guava', 'apple', 'malta','boroi', 'coconut'];
+ areaX=7.5*7.50;
     }
     else{   trees = ['segun', 'shal', 'kathal'];
-
+ areaX=20*20.0;
     }
   }
   @override
@@ -48,7 +51,7 @@ class _S2State extends State<S2> {
         child: Column(
           children: [
             Text(
-                'You can plant approximately ${(widget.area / (7.5 * 7.5)).floor()} plants'),
+                'You can plant approximately ${(widget.area / areaX).floor()} plants'),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -56,7 +59,7 @@ class _S2State extends State<S2> {
                 style: TextStyle(color: Colors.green, fontSize: 35),
               ),
             ),
-            (widget.area / (7.5 * 7.5)).floor() == selectedtree.length
+            (widget.area / areaX).floor() == selectedtree.length
                 ? ElevatedButton(
                     onPressed: () {
                       print(x);
