@@ -10,25 +10,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screens/s1.dart';
 
+//asss
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+//njnj
   runApp(GetMaterialApp(
     home: MyHomePage(),
   ));
 }
 
 class MyHomePage extends StatefulWidget {
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -63,12 +55,14 @@ class _MyHomePageState extends State<MyHomePage> {
       email = preferences.getString('email');
       getDataFromFirebase();
     });
-  } var dataFF;List<dynamic> g = [];
+  }
+
+  var dataFF;
+  List<dynamic> g = [];
   List<dynamic> gFinal = [];
   var gfx;
   double gLength;
-  getDataFromFirebase()async{
-
+  getDataFromFirebase() async {
     var res2 = await FirebaseFirestore.instance
         .collection("Users")
         .doc(email)
@@ -77,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     res2.docs.forEach((result) {
       dataFF = result.data();
-     // print( result.data()['tree_list']);
+      // print( result.data()['tree_list']);
 
       setState(() {
         g.add(dataFF);
@@ -89,7 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
       gFinal = g;
       gfx = gFinal.length;
     }
-  }int counttest = 0;
+  }
+
+  int counttest = 0;
 
   @override
   void initState() {
@@ -98,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // TODO: implement initState
     super.initState();
   }
+
   final _loginForm = GlobalKey<FormState>();
   TextEditingController _userName = TextEditingController();
   final firestoreInstance = FirebaseFirestore.instance;
@@ -117,33 +114,46 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: auth == true
           ? Center(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ElevatedButton(onPressed: (){
-                  Get.to(GetArea('Garden Deshi'));
-                },child: Text('Make Garden Deshi')),
-                ElevatedButton(onPressed: (){
-                  Get.to(GetArea('Garden Abroad'));
-                },child: Text('Make Garden')),
-                ElevatedButton(onPressed: (){
-                  Get.to(GetArea('Wooden Garden'));
-                },child: Text('Wooden Garden')),
-                Expanded(flex: 1,
-                  child: ListView.builder(
-                    itemCount: gFinal.length,
-                    itemBuilder: (context, i){
-                      print(gFinal[i]['tree_list']);
-                      return ListTile(title: Text('Garden Number $i'),onTap: (){
-                       Get.to(Garden(gFinal[i]['tree_list'], 20, 'Garden', gFinal[i]['length'],0));
-                      },);
-                    },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        Get.to(GetArea('Garden Deshi'));
+                      },
+                      child: Text('Make Garden Deshi')),
+                  ElevatedButton(
+                      onPressed: () {
+                        Get.to(GetArea('Garden Abroad'));
+                      },
+                      child: Text('Make Garden')),
+                  ElevatedButton(
+                      onPressed: () {
+                        Get.to(GetArea('Wooden Garden'));
+                      },
+                      child: Text('Wooden Garden n')),
+                  Expanded(
+                    flex: 1,
+                    child: ListView.builder(
+                      itemCount: gFinal.length,
+                      itemBuilder: (context, i) {
+                        print(gFinal[i]['tree_list']);
+                        return ListTile(
+                          title: Text('Garden Number $i'),
+                          onTap: () {
+                            Get.to(Garden(gFinal[i]['tree_list'], 20, 'Garden',
+                                gFinal[i]['length'], 0));
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )
+                ],
+              ),
+            )
           : Center(
-              child: Form(  key: _loginForm,
+              child: Form(
+                key: _loginForm,
                 child: Column(
                   children: [
                     ElevatedButton(
@@ -164,7 +174,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 SharedPreferences preferences =
                                     await SharedPreferences.getInstance();
                                 preferences.setBool('islogin', true);
-                                preferences.setString('email', result.user.email);
+                                preferences.setString(
+                                    'email', result.user.email);
                               });
                             }
                           });
@@ -187,7 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 auth = true;
                               });
                               SharedPreferences preferences =
-                              await SharedPreferences.getInstance();
+                                  await SharedPreferences.getInstance();
                               preferences.setBool('islogin', true);
                               preferences.setString('email', _userName.text);
                             });
